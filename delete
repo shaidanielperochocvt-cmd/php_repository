@@ -1,0 +1,21 @@
+?php
+// Connect to the database.
+require_once __DIR__ . "/dbconfig.php";
+
+// Choose the item ID to delete.
+$itemId = 3;
+
+// SQL query to delete the item.
+$sql = "DELETE FROM grocery_items WHERE item_id = :id";
+
+// Prepare and execute the query.
+$stmt = $pdo->prepare($sql);
+$stmt->execute([":id" => $itemId]);
+
+// Check if a record was deleted.
+if ($stmt->rowCount() > 0) {
+    echo "Grocery item deleted successfully!";
+} else {
+    echo "No grocery item found with that ID.";
+}
+?>
