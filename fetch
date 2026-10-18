@@ -1,0 +1,25 @@
+<?php
+// Connect to the database.
+require_once __DIR__ . "/dbconfig.php";
+
+// Find the grocery item with ID 1.
+$sql = "SELECT * FROM grocery_items WHERE item_id = :id";
+
+// Prepare and execute the query.
+$stmt = $pdo->prepare($sql);
+$stmt->execute([":id" => 1]);
+
+// Fetch only one record.
+$item = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Display the result.
+echo "<pre>";
+
+if ($item) {
+    print_r($item);
+} else {
+    echo "No grocery item found.";
+}
+
+echo "</pre>";
+?>
