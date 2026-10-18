@@ -1,0 +1,19 @@
+<?php
+// Connect to the database.
+require_once "dbconfig.php";
+
+// Get all grocery items.
+$sql = "SELECT * FROM grocery_items";
+
+// Prepare and run the query.
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+
+// Get all records.
+$items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Display all records.
+echo "<pre>";
+print_r($items);
+echo "</pre>";
+?>
