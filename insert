@@ -1,0 +1,30 @@
+<?php
+// Connect to the database.
+require_once __DIR__ . "/dbconfig.php";
+
+// SQL query for adding a grocery item.
+$sql = "INSERT INTO grocery_items
+        (item_name, brand_name, category, unit_size,
+         price_rub, stock_quantity, shelf_life_days)
+        VALUES
+        (:name, :brand, :category, :size,
+         :price, :stock, :shelf_life)";
+
+// Prepare the query.
+$stmt = $pdo->prepare($sql);
+
+// Insert a new grocery item.
+$stmt->execute([
+    ":name" => "Whole Milk 3.4%",
+    ":brand" => "Prostokvashino",
+    ":category" => "Dairy",
+    ":size" => "930 ml",
+    ":price" => 109.90,
+    ":stock" => 120,
+    ":shelf_life" => 10
+]);
+
+// Display the result.
+echo "Grocery item inserted successfully!";
+echo "<br>New Item ID: " . $pdo->lastInsertId();
+?>
