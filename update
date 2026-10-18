@@ -1,0 +1,32 @@
+<?php
+// Connect to the database.
+require_once __DIR__ . "/dbconfig.php";
+
+// Choose the item to update.
+$itemId = 1;
+
+// Set the new price and stock quantity.
+$newPrice = 129.90;
+$newStock = 25;
+
+// SQL query to update the record.
+$sql = "UPDATE grocery_items
+        SET price_rub = :price,
+            stock_quantity = :stock
+        WHERE item_id = :id";
+
+// Prepare and execute the query.
+$stmt = $pdo->prepare($sql);
+$stmt->execute([
+    ":price" => $newPrice,
+    ":stock" => $newStock,
+    ":id" => $itemId
+]);
+
+// Display the result.
+if ($stmt->rowCount() > 0) {
+    echo "Grocery item updated successfully!";
+} else {
+    echo "<br>No changes made. Check the item ID or values.";
+}
+?>
